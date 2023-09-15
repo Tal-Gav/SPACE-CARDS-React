@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.space-background {
+  background-repeat: no-repeat;
+  background-size: 100% 100%; /* Stretch the image */
+  background-position: center center; /* Center the image */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.cards-grid-container {
+  padding-top: 40px; /* Adjust the padding as needed */
+}

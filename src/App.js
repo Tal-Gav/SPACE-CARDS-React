@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import GameTitle from "./GameTitle";
+import CardsGrid from "./CardsGrid";
 
 function App() {
+  const spaceBackground = "./space/background-space.jpg";
+
+  const arrOfObj = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+  ];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="content"></div>
+      <GameTitle />
+      <div className="cards-grid-container">
+        <CardsGrid arrOfObj={arrOfObj} />
+      </div>
+      <div
+        className="space-background"
+        style={{ backgroundImage: `url(${spaceBackground})` }}
+      ></div>
     </div>
   );
 }
