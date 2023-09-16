@@ -37,32 +37,51 @@ export default function CardsGrid(props) {
     return randomizedImages;
   };
 
-  // Create a ref to track component mount status
-  const isMounted = useRef(false);
-
-  // Use state to store randomizedImages
+  const isCardMounted = useRef(false);
+  const [selectedCards, setSelectedCards] = useState([]);
   const [randomizedImages, setRandomizedImages] = useState([]);
 
-  useEffect(() => {
-    if (!isMounted.current) {
-      // Component is mounting
+  const setRandomCardImgs = () => {
+    if (!isCardMounted.current) {
       setRandomizedImages(createRandomImages());
-      isMounted.current = true; // Set the isMounted ref to true after the initial render
+      isCardMounted.current = true;
     }
-  }, []); // The empty dependency array ensures it runs only once
+  };
+  const compareCardImgs = () => {
+    console.log("Selected Cards:", selectedCards);
+
+    if (selectedCards.length === 2) {
+      const [firstCardImg, secondCardImg] = selectedCards;
+
+      if (firstCardImg === secondCardImg) {
+        console.log("Match! :)");
+      } else {
+        console.log("Not a match :(");
+      }
+      setSelectedCards([]);
+    }
+  };
+
+  useEffect(() => {
+    setRandomCardImgs();
+    compareCardImgs();
+  }, [selectedCards]); // The empty dependency array ensures it runs only once
+
+  const handleCardClick = (image) => {
+    setSelectedCards((prevSelectedCards) => [...prevSelectedCards, image]);
+  };
 
   return (
     <div className="container">
       {randomizedImages.map((image, index) => (
         <div key={index}>
-          <Card image={image} />
+          <Card image={image} onCardClick={handleCardClick} />
         </div>
       ))}
       <button
         style={{ height: "100px" }}
         onClick={() => setRandomizedImages(createRandomImages())}
       >
-        {" "}
         Regenerate Cards
       </button>
     </div>

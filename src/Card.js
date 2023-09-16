@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import "./Card.css";
 
 const Card = (props) => {
-  const { image } = props;
+  const { image, onCardClick } = props;
   let cardBack = "./space/back-card.png";
-
   const [src, setSrc] = useState(cardBack);
 
   const handleCardClick = () => {
-    console.log("clicked", image);
     setSrc(`./space/${image}.png`);
+    onCardClick(image);
   };
 
   return (
