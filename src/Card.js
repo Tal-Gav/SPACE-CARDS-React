@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Card.css";
 import { useSpring, animated } from "@react-spring/web";
 
@@ -11,13 +11,17 @@ const Card = (props) => {
     transform: `perspective(600px) rotateY(${isFlipped ? 180 : 0}deg)`,
     opacity: isFlipped ? 0 : 1,
     resetOpacity: isFlipped ? 1 : 0,
-    config: { duration: 250 }, // Adjust the duration (in milliseconds) as needed
+    config: { mass: 5, tension: 500, friction: 50 },
   });
 
   const handleCardClick = () => {
-    setIsFlipped(!isFlipped);
     onCardClick(image);
+    setIsFlipped(!isFlipped);
   };
+
+  useEffect(() => {
+    console.log(isFlipped); // Log the updated state
+  }, [isFlipped]);
 
   return (
     <div onClick={handleCardClick}>

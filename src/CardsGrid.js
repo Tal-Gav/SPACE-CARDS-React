@@ -63,27 +63,20 @@ export default function CardsGrid(props) {
   };
 
   useEffect(() => {
+    console.log(selectedCards);
     setRandomCardImgs();
     compareCardImgs();
   }, [selectedCards]); // The empty dependency array ensures it runs only once
 
-  const [isCardFlipped, setIsCardFlipped] = useState([false]);
-
   const handleCardClick = (image) => {
     setSelectedCards((prevSelectedCards) => [...prevSelectedCards, image]);
-    setIsCardFlipped(!isCardFlipped);
-    console.log("hi", isCardFlipped);
   };
 
   return (
     <div className="container">
       {randomizedImages.map((image, index) => (
         <div key={index}>
-          <Card
-            image={image}
-            isCardFlipped={isCardFlipped}
-            onCardClick={handleCardClick}
-          />
+          <Card image={image} onCardClick={handleCardClick} />
         </div>
       ))}
       <button
