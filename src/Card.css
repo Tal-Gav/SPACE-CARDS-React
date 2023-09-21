@@ -8,16 +8,20 @@
   background: radial-gradient(50% 50% at 50% 50%, #2e2876 0%, #430099 100%);
   box-shadow: 0px 0px 8px #7d23f4, 0px 0px 14px #430099, 0px 0px 0px #430099,
     0px 0px 10px #430099, 0px 0px 10px #aa96e4, 0px 0px 10px #aa96e4; /* Add a drop shadow here */
+  cursor: pointer;
 }
 
 .card-picture {
   width: 17.5vh;
   height: 17.5vh;
   opacity: 1;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.4s ease;
+  scale: 0.85;
   /* Remove the top and left properties */
 }
-
+.invert {
+  transform: scale(-1, 1);
+}
 .shiny {
   position: relative;
   overflow: hidden;
