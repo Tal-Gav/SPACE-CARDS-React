@@ -47,11 +47,11 @@ export default function CardsGrid(props) {
       isCardMounted.current = true;
     }
   };
-  const compareCardImgs = () => {
-    console.log("Selected Cards:", selectedCards);
 
+  const compareCardImgs = () => {
     if (selectedCards.length === 2) {
       const [firstCardImg, secondCardImg] = selectedCards;
+      console.log("Selected Cards:", selectedCards);
 
       if (firstCardImg === secondCardImg) {
         console.log("Match! :)");
@@ -67,15 +67,23 @@ export default function CardsGrid(props) {
     compareCardImgs();
   }, [selectedCards]); // The empty dependency array ensures it runs only once
 
+  const [isCardFlipped, setIsCardFlipped] = useState([false]);
+
   const handleCardClick = (image) => {
     setSelectedCards((prevSelectedCards) => [...prevSelectedCards, image]);
+    setIsCardFlipped(!isCardFlipped);
+    console.log("hi", isCardFlipped);
   };
 
   return (
     <div className="container">
       {randomizedImages.map((image, index) => (
         <div key={index}>
-          <Card image={image} onCardClick={handleCardClick} />
+          <Card
+            image={image}
+            isCardFlipped={isCardFlipped}
+            onCardClick={handleCardClick}
+          />
         </div>
       ))}
       <button

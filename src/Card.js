@@ -3,17 +3,24 @@ import "./Card.css";
 
 const Card = (props) => {
   const { image, onCardClick } = props;
-  let cardBack = "./space/back-card.png";
-  const [src, setSrc] = useState(cardBack);
+  const cardBack = "./space/back-card.png";
+  const [isFlipped, setIsFlipped] = useState(false); // Local state for each card
 
   const handleCardClick = () => {
-    setSrc(`./space/${image}.png`);
+    setIsFlipped(!isFlipped);
     onCardClick(image);
   };
 
   return (
-    <div className="square shiny" onClick={handleCardClick}>
-      <img src={src} alt="hi" className="card-picture center"></img>
+    <div
+      className={`square shiny card-flip ${isFlipped ? "flipped" : ""}`}
+      onClick={handleCardClick}
+    >
+      <img
+        src={isFlipped ? `./space/${image}.png` : cardBack}
+        alt="hi"
+        className="card-picture center"
+      />
     </div>
   );
 };
