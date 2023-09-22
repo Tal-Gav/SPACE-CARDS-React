@@ -53,7 +53,7 @@ const CardsGrid = (props) => {
 
   // TODO: Pass isFlipped to parent
 
-  const failedMatch = (firstCardIndex, secondCardIndex) => {
+  const resetCards = (firstCardIndex, secondCardIndex) => {
     // flip back each cards
 
     setTimeout(() => {
@@ -78,7 +78,7 @@ const CardsGrid = (props) => {
         console.log("Match! :)");
       } else {
         console.log("Not a match :(");
-        failedMatch(firstCardIndex, secondCardIndex);
+        resetCards(firstCardIndex, secondCardIndex);
       }
 
       // reset the 2 current cards
