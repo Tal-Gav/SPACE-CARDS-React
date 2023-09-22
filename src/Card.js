@@ -37,7 +37,7 @@ const Card = (props) => {
   }, [isFlipped]);
 
   return (
-    <Tilt options={defaultOptions} style={{ height: 250, width: 250 }}>
+    <Tilt options={defaultOptions}>
       <div onClick={handleCardClick}>
         <div class="card" data-card3d></div>
         <animated.div
