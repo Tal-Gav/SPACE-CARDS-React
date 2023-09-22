@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./CardsGrid.css";
 import Card from "./Card";
 
-export default function CardsGrid(props) {
+const CardsGrid = (props) => {
   const getRandomImage = (cardImages) => {
     const keysArray = Object.keys(cardImages);
     const randomKey = keysArray[Math.floor(Math.random() * keysArray.length)];
@@ -50,6 +50,8 @@ export default function CardsGrid(props) {
 
   // TODO: Pass isFlipped to parent
 
+  const [isMatched, setIsMatched] = useState();
+
   const compareCardImgs = () => {
     if (selectedCards.length === 2) {
       const [firstCardImg, secondCardImg] = selectedCards;
@@ -57,19 +59,24 @@ export default function CardsGrid(props) {
 
       if (firstCardImg === secondCardImg) {
         console.log("Match! :)");
+        setIsMatched(true);
       } else {
         console.log("Not a match :(");
+        setIsMatched(false);
       }
       setSelectedCards([]);
+
+      // Add this line to reset isMatched to undefined after the compare
+      setTimeout(() => {
+        setIsMatched(undefined);
+      }, 1000); // Adjust the delay time (in milliseconds) as needed
     }
   };
 
   useEffect(() => {
-    console.log(selectedCards);
     setRandomCardImgs();
     compareCardImgs();
-  }, [selectedCards]); // The empty dependency array ensures it runs only once
-
+  }, [selectedCards]);
   const handleCardClick = (image) => {
     setSelectedCards((prevSelectedCards) => [...prevSelectedCards, image]);
   };
@@ -78,7 +85,12 @@ export default function CardsGrid(props) {
     <div className="container">
       {randomizedImages.map((image, index) => (
         <div key={index}>
-          <Card image={image} onCardClick={handleCardClick} />
+          <Card
+            key={index}
+            image={image}
+            onCardClick={handleCardClick}
+            isMatched={isMatched}
+          />
         </div>
       ))}
       <button
@@ -89,4 +101,5 @@ export default function CardsGrid(props) {
       </button>
     </div>
   );
-}
+};
+export default CardsGrid;

@@ -4,7 +4,7 @@ import "./Card.css";
 import { useSpring, animated } from "@react-spring/web";
 
 const Card = (props) => {
-  const { image, onCardClick } = props;
+  const { image, onCardClick, isMatched } = props;
   const [isFlipped, setIsFlipped] = useState(false);
   const cardBack = "./space/back-card.png";
 
@@ -33,13 +33,21 @@ const Card = (props) => {
   };
 
   useEffect(() => {
-    console.log(isFlipped); // Log the updated state
-  }, [isFlipped]);
+    console.log("isMatched", isMatched);
+
+    if (isMatched === false) {
+      // If the card was just flipped back (unflipped), add a delay before flipping it
+      setTimeout(() => {
+        setIsFlipped(false);
+        console.log("flipping it back");
+      }, 1000); // Adjust the delay time (in milliseconds) as needed
+    }
+    // Log the updated state
+  }, [isFlipped, isMatched]);
 
   return (
     <Tilt options={defaultOptions}>
       <div onClick={handleCardClick}>
-        <div class="card" data-card3d></div>
         <animated.div
           className={`square shiny`}
           style={{
@@ -53,7 +61,7 @@ const Card = (props) => {
               alt="hi"
               className="card-picture center"
               style={{
-                position: "absolute", // Use absolute positioning for the images
+                position: "absolute",
                 top: 0,
                 left: 0,
                 width: "100%",
@@ -66,7 +74,7 @@ const Card = (props) => {
               alt="hi"
               className="card-picture center invert"
               style={{
-                position: "absolute", // Use absolute positioning for the images
+                position: "absolute",
                 top: 0,
                 left: 0,
                 width: "100%",
