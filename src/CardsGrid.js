@@ -6,9 +6,10 @@ const CardsGrid = (props) => {
   const isCardMounted = useRef(false);
   const [selectedCards, setSelectedCards] = useState([undefined, undefined]);
   const [randomizedImages, setRandomizedImages] = useState([]);
-  const [cardsFlippedState, setCardsFlippedState] = useState(
+  const [cardsFlippedStates, setCardsFlippedStates] = useState(
     Array.from({ length: 18 }, () => false)
   );
+
   const getRandomImage = (cardImages) => {
     const keysArray = Object.keys(cardImages);
     const randomKey = keysArray[Math.floor(Math.random() * keysArray.length)];
@@ -52,6 +53,19 @@ const CardsGrid = (props) => {
 
   // TODO: Pass isFlipped to parent
 
+  const failedMatch = (firstCardIndex, secondCardIndex) => {
+    // flip back each cards
+
+    setTimeout(() => {
+      let currentFlippedCardsState = [...cardsFlippedStates];
+      // setting the first one also in order to return
+      currentFlippedCardsState[firstCardIndex] = false;
+      currentFlippedCardsState[secondCardIndex] = false;
+
+      setCardsFlippedStates(currentFlippedCardsState);
+    }, 1000);
+  };
+
   const compareCardImgs = () => {
     if (!selectedCards.includes(undefined)) {
       console.log("Selected Cards:", selectedCards);
@@ -64,35 +78,29 @@ const CardsGrid = (props) => {
         console.log("Match! :)");
       } else {
         console.log("Not a match :(");
-        setTimeout(() => {
-          let temp = [...cardsFlippedState];
-          temp[firstCardIndex] = false;
-          setCardsFlippedState(temp);
-        }, 1000);
-
-        setTimeout(() => {
-          let temp = [...cardsFlippedState];
-          temp[firstCardIndex] = false;
-          temp[secondCardIndex] = false;
-          setCardsFlippedState(temp);
-        }, 1000);
+        failedMatch(firstCardIndex, secondCardIndex);
       }
 
+      // reset the 2 current cards
       setTimeout(() => {
         setSelectedCards([undefined, undefined]);
       }, 1000);
     }
   };
-  console.log(cardsFlippedState, selectedCards);
+
+  console.log(cardsFlippedStates, selectedCards);
   useEffect(() => {
     setRandomCardImgs();
     compareCardImgs();
   }, [selectedCards]);
 
   const handleCardClick = (index) => {
-    let temp = [...selectedCards];
-    temp[temp[0] === undefined ? 0 : 1] = index;
-    setSelectedCards(temp);
+    // fill the undefined array -> [undefined, undefined] -> if the first ([0]) is undefined, than replace it with the image_index. and then,
+    // if it's not undefined, replace the second ([1]) with image_index. that's how we fill the array with 2 image_indexes
+    let currentSelectedCards = [...selectedCards];
+
+    currentSelectedCards[currentSelectedCards[0] === undefined ? 0 : 1] = index;
+    setSelectedCards(currentSelectedCards);
   };
 
   return (
@@ -104,8 +112,8 @@ const CardsGrid = (props) => {
             image={image}
             onCardClick={handleCardClick}
             selectedCards={selectedCards}
-            cardsFlippedState={cardsFlippedState}
-            setCardsFlippedState={setCardsFlippedState}
+            cardsFlippedStates={cardsFlippedStates}
+            setCardsFlippedStates={setCardsFlippedStates}
           />
         </div>
       ))}

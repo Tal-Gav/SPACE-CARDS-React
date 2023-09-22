@@ -8,8 +8,8 @@ const Card = (props) => {
     index,
     image,
     onCardClick,
-    cardsFlippedState,
-    setCardsFlippedState,
+    cardsFlippedStates,
+    setCardsFlippedStates,
     selectedCards,
   } = props;
 
@@ -17,10 +17,10 @@ const Card = (props) => {
 
   const { transform, opacity, resetOpacity } = useSpring({
     transform: `perspective(600px) rotateY(${
-      cardsFlippedState[index] ? 180 : 0
+      cardsFlippedStates[index] ? 180 : 0
     }deg)`,
-    opacity: cardsFlippedState[index] ? 0 : 1,
-    resetOpacity: cardsFlippedState[index] ? 1 : 0,
+    opacity: cardsFlippedStates[index] ? 0 : 1,
+    resetOpacity: cardsFlippedStates[index] ? 1 : 0,
     config: { mass: 5, tension: 500, friction: 50 },
   });
 
@@ -38,9 +38,14 @@ const Card = (props) => {
 
   const handleCardClick = () => {
     onCardClick(index);
-    let temp = [...cardsFlippedState];
-    temp[index] = !temp[index];
-    setCardsFlippedState(temp);
+
+    // make the flip animation, by changing the flipstate of the current card index in the cards_flipped_states array,
+    // then it renders the componenet accordingly (returns the specific card layout)
+
+    let currentFlippedCardsState = [...cardsFlippedStates];
+    currentFlippedCardsState[index] = !currentFlippedCardsState[index];
+
+    setCardsFlippedStates(currentFlippedCardsState);
   };
 
   return (
@@ -57,7 +62,7 @@ const Card = (props) => {
           }}
         >
           <div>
-            {!cardsFlippedState[index] ? (
+            {!cardsFlippedStates[index] ? (
               <img
                 src={cardBack}
                 alt="hi"
