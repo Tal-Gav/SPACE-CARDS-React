@@ -48,6 +48,8 @@ export default function CardsGrid(props) {
     }
   };
 
+  // TODO: Pass isFlipped to parent
+
   const compareCardImgs = () => {
     if (selectedCards.length === 2) {
       const [firstCardImg, secondCardImg] = selectedCards;
