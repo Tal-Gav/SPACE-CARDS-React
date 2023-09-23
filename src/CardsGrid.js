@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import "./CardsGrid.css";
 import Card from "./Card";
 import VictoryAlert from './VictoryAlert'
-import SweetAlert2 from 'react-sweetalert2';
-
 
 const CardsGrid = (props) => {
   const isCardMounted = useRef(false);
@@ -129,6 +127,10 @@ const CardsGrid = (props) => {
     setSelectedCards(currentSelectedCards);
   };
 
+  const restartGame = () => {
+    window.location.reload(false);
+  }
+  
   return (
     <div className="container">
       {randomizedImages.map((image, index) => (
@@ -144,7 +146,7 @@ const CardsGrid = (props) => {
           />
         </div>
       ))}           
-      {showVictoryAlert ? <VictoryAlert /> : ''}
+      {showVictoryAlert ? <VictoryAlert restartGame={restartGame} /> : ''}
       <button
         style={{ height: "100px" }}
         onClick={() => setRandomizedImages(createRandomImages())}

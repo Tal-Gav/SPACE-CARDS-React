@@ -1,0 +1,10 @@
+.custom-popup-class {
+    background-color: #2f3336;
+    color: white; 
+
+    .swal2-confirm {
+        background-color: #7d23f4; /* Set the button background color */
+        color: white; /* Set the button text color */
+        /* Add any other button styling you want */
+    }
+}
