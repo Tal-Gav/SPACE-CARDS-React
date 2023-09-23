@@ -147,12 +147,6 @@ const CardsGrid = (props) => {
         </div>
       ))}           
       {showVictoryAlert ? <VictoryAlert restartGame={restartGame} /> : ''}
-      <button
-        style={{ height: "100px" }}
-        onClick={() => setRandomizedImages(createRandomImages())}
-      >
-        Regenerate Cards
-      </button>
     </div>
   );
 };
