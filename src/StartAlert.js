@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import SweetAlert2 from "react-sweetalert2";
 import "./Alert.css";
 
-const VictoryAlert = (props) => {
-  const { restartGame } = props;
+const StartAlert = (props) => {
   const [swalProps, setSwalProps] = useState({
-    show: false, // Initially, don't show the alert
-    title: "You Won!",
-    html: '<img src="./space/medal.png" alt="Victory Image" style="max-width: 20%;" />',
-    confirmButtonText: "New Game",
+    show: true, // Initially, don't show the alert
+    title: "Space Cards",
+    html: '<img src="./space/space-favicon.png" alt="Victory Image" style="max-width: 40%;" /><br/>The goal is to find all the pairs.<br/>Good Luck!',
+    confirmButtonText: "Let's Go",
     customClass: {
       popup: "custom-popup-class", // Define a custom CSS class for the alert
     },
@@ -24,10 +23,9 @@ const VictoryAlert = (props) => {
       {...swalProps}
       onConfirm={(result) => {
         // run when clieked in confirm and promise is resolved...
-        restartGame();
       }}
     />
   );
 };
 
-export default VictoryAlert;
+export default StartAlert;

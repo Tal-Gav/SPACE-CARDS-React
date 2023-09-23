@@ -26,6 +26,13 @@
   transition: opacity 0.4s ease;
   scale: 0.85;
   /* Remove the top and left properties */
+
+  /* disable drag */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .invert {
   transform: scale(-1, 1);

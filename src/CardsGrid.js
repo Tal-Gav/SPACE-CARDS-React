@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./CardsGrid.css";
 import Card from "./Card";
-import VictoryAlert from './VictoryAlert'
+import VictoryAlert from "./VictoryAlert";
+import StartAlert from "./StartAlert";
 
 const CardsGrid = (props) => {
   const isCardMounted = useRef(false);
@@ -12,7 +13,6 @@ const CardsGrid = (props) => {
     Array.from({ length: 18 }, () => false)
   );
   const [showVictoryAlert, setShowVictoryAlert] = useState(false);
-
 
   const getRandomImage = (cardImages) => {
     const keysArray = Object.keys(cardImages);
@@ -74,10 +74,8 @@ const CardsGrid = (props) => {
   };
 
   const isAllCardsMatched = () => {
-    let check = cardsFlippedStates.every(card => card === true);
-    console.log('check', check, cardsFlippedStates)
-    return check
-  }
+    return cardsFlippedStates.every((card) => card === true);
+  };
 
   const compareCardImgs = () => {
     if (!selectedCards.includes(undefined)) {
@@ -86,22 +84,22 @@ const CardsGrid = (props) => {
       const [firstCardIndex, secondCardIndex] = selectedCards;
 
       if (
-        randomizedImages[firstCardIndex] === randomizedImages[secondCardIndex] && firstCardIndex !== secondCardIndex
+        randomizedImages[firstCardIndex] ===
+          randomizedImages[secondCardIndex] &&
+        firstCardIndex !== secondCardIndex
       ) {
         console.log("Match! :)");
-        disableMatchedCards(firstCardIndex, secondCardIndex)
+        disableMatchedCards(firstCardIndex, secondCardIndex);
 
         if (isAllCardsMatched()) {
-          console.log('game finished')
-          setShowVictoryAlert(true)
+          console.log("game finished");
+          setShowVictoryAlert(true);
         }
-
       } else {
         console.log("Not a match :(");
         resetCards(firstCardIndex, secondCardIndex);
       }
-      console.log(cardsFlippedStates)
-
+      console.log(cardsFlippedStates);
 
       // reset the 2 current cards
       setTimeout(() => {
@@ -115,7 +113,6 @@ const CardsGrid = (props) => {
 
     setRandomCardImgs();
     compareCardImgs();
-
   }, [selectedCards]);
 
   const handleCardClick = (index) => {
@@ -129,8 +126,8 @@ const CardsGrid = (props) => {
 
   const restartGame = () => {
     window.location.reload(false);
-  }
-  
+  };
+
   return (
     <div className="container">
       {randomizedImages.map((image, index) => (
@@ -145,8 +142,9 @@ const CardsGrid = (props) => {
             isCardDisabled={disabledCards.includes(index)}
           />
         </div>
-      ))}           
-      {showVictoryAlert ? <VictoryAlert restartGame={restartGame} /> : ''}
+      ))}
+      <StartAlert />
+      {showVictoryAlert ? <VictoryAlert restartGame={restartGame} /> : ""}
     </div>
   );
 };
