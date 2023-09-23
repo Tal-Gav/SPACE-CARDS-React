@@ -1,14 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./CardsGrid.css";
 import Card from "./Card";
+import VictoryAlert from './VictoryAlert'
+import SweetAlert2 from 'react-sweetalert2';
+
 
 const CardsGrid = (props) => {
   const isCardMounted = useRef(false);
   const [selectedCards, setSelectedCards] = useState([undefined, undefined]);
   const [randomizedImages, setRandomizedImages] = useState([]);
+  const [disabledCards, setDisabledCards] = useState([]);
   const [cardsFlippedStates, setCardsFlippedStates] = useState(
     Array.from({ length: 18 }, () => false)
   );
+  const [showVictoryAlert, setShowVictoryAlert] = useState(false);
+
 
   const getRandomImage = (cardImages) => {
     const keysArray = Object.keys(cardImages);
@@ -55,7 +61,6 @@ const CardsGrid = (props) => {
 
   const resetCards = (firstCardIndex, secondCardIndex) => {
     // flip back each cards
-
     setTimeout(() => {
       let currentFlippedCardsState = [...cardsFlippedStates];
       // setting the first one also in order to return
@@ -65,6 +70,16 @@ const CardsGrid = (props) => {
       setCardsFlippedStates(currentFlippedCardsState);
     }, 1000);
   };
+  const disableMatchedCards = (firstCardIndex, secondCardIndex) => {
+    // Mark the matched cards as disabled in the cardsFlippedStates array
+    setDisabledCards([...disabledCards, firstCardIndex, secondCardIndex]);
+  };
+
+  const isAllCardsMatched = () => {
+    let check = cardsFlippedStates.every(card => card === true);
+    console.log('check', check, cardsFlippedStates)
+    return check
+  }
 
   const compareCardImgs = () => {
     if (!selectedCards.includes(undefined)) {
@@ -73,13 +88,22 @@ const CardsGrid = (props) => {
       const [firstCardIndex, secondCardIndex] = selectedCards;
 
       if (
-        randomizedImages[firstCardIndex] === randomizedImages[secondCardIndex]
+        randomizedImages[firstCardIndex] === randomizedImages[secondCardIndex] && firstCardIndex !== secondCardIndex
       ) {
         console.log("Match! :)");
+        disableMatchedCards(firstCardIndex, secondCardIndex)
+
+        if (isAllCardsMatched()) {
+          console.log('game finished')
+          setShowVictoryAlert(true)
+        }
+
       } else {
         console.log("Not a match :(");
         resetCards(firstCardIndex, secondCardIndex);
       }
+      console.log(cardsFlippedStates)
+
 
       // reset the 2 current cards
       setTimeout(() => {
@@ -88,10 +112,12 @@ const CardsGrid = (props) => {
     }
   };
 
-  console.log(cardsFlippedStates, selectedCards);
   useEffect(() => {
+    console.log(selectedCards);
+
     setRandomCardImgs();
     compareCardImgs();
+
   }, [selectedCards]);
 
   const handleCardClick = (index) => {
@@ -114,9 +140,11 @@ const CardsGrid = (props) => {
             selectedCards={selectedCards}
             cardsFlippedStates={cardsFlippedStates}
             setCardsFlippedStates={setCardsFlippedStates}
+            isCardDisabled={disabledCards.includes(index)}
           />
         </div>
-      ))}
+      ))}           
+      {showVictoryAlert ? <VictoryAlert /> : ''}
       <button
         style={{ height: "100px" }}
         onClick={() => setRandomizedImages(createRandomImages())}

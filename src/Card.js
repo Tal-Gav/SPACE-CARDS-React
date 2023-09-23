@@ -10,7 +10,7 @@ const Card = (props) => {
     onCardClick,
     cardsFlippedStates,
     setCardsFlippedStates,
-    selectedCards,
+    selectedCards, isCardDisabled
   } = props;
 
   const cardBack = "./space/back-card.png";
@@ -37,8 +37,8 @@ const Card = (props) => {
   };
 
   const handleCardClick = () => {
+    if (!isCardDisabled){
     onCardClick(index);
-
     // make the flip animation, by changing the flipstate of the current card index in the cards_flipped_states array,
     // then it renders the componenet accordingly (returns the specific card layout)
 
@@ -46,6 +46,7 @@ const Card = (props) => {
     currentFlippedCardsState[index] = !currentFlippedCardsState[index];
 
     setCardsFlippedStates(currentFlippedCardsState);
+    }
   };
 
   return (
@@ -55,7 +56,7 @@ const Card = (props) => {
         className={!selectedCards.includes(undefined) ? "disable-div" : ""}
       >
         <animated.div
-          className={`square shiny`}
+          className={isCardDisabled ? 'square matched-card' : 'square card-default shiny'}
           style={{
             transform,
             position: "relative", // Use relative positioning for the square div
@@ -80,7 +81,7 @@ const Card = (props) => {
               <img
                 src={`./space/${image}.png`}
                 alt="hi"
-                className="card-picture center invert"
+                className="card-picture center invert" 
                 style={{
                   position: "absolute",
                   top: 0,
