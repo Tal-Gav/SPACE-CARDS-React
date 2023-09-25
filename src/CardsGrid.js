@@ -44,7 +44,6 @@ const CardsGrid = (props) => {
         cardImages[randomImage]++;
       }
     }
-    console.log(randomizedImages);
     return randomizedImages;
   };
 
@@ -79,8 +78,6 @@ const CardsGrid = (props) => {
 
   const compareCardImgs = () => {
     if (!selectedCards.includes(undefined)) {
-      console.log("Selected Cards:", selectedCards);
-
       const [firstCardIndex, secondCardIndex] = selectedCards;
 
       if (
@@ -88,19 +85,14 @@ const CardsGrid = (props) => {
           randomizedImages[secondCardIndex] &&
         firstCardIndex !== secondCardIndex
       ) {
-        console.log("Match! :)");
         disableMatchedCards(firstCardIndex, secondCardIndex);
 
         if (isAllCardsMatched()) {
-          console.log("game finished");
           setShowVictoryAlert(true);
         }
       } else {
-        console.log("Not a match :(");
         resetCards(firstCardIndex, secondCardIndex);
       }
-      console.log(cardsFlippedStates);
-
       // reset the 2 current cards
       setTimeout(() => {
         setSelectedCards([undefined, undefined]);
@@ -109,8 +101,6 @@ const CardsGrid = (props) => {
   };
 
   useEffect(() => {
-    console.log(selectedCards);
-
     setRandomCardImgs();
     compareCardImgs();
   }, [selectedCards]);
