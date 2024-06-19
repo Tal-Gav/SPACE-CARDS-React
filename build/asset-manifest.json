@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Space-Cards/static/css/main.b8878d93.css",
+    "main.js": "/Space-Cards/static/js/main.4b0af3bb.js",
+    "index.html": "/Space-Cards/index.html",
+    "main.b8878d93.css.map": "/Space-Cards/static/css/main.b8878d93.css.map",
+    "main.4b0af3bb.js.map": "/Space-Cards/static/js/main.4b0af3bb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b8878d93.css",
+    "static/js/main.4b0af3bb.js"
+  ]
+}

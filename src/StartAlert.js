@@ -6,7 +6,7 @@ const StartAlert = (props) => {
   const [swalProps, setSwalProps] = useState({
     show: true, // Initially, don't show the alert
     title: "Space Cards",
-    html: '<img src="./space/space-favicon.png" alt="Victory Image" style="max-width: 40%;" /><br/>The goal is to find all the pairs.<br/>Good Luck!',
+    html: '<img src="./space/space-favicon.png" alt="Victory Image" style="max-width: 20%;" /><br/>The goal is to find all the pairs.<br/>Good Luck!',
     confirmButtonText: "Let's Go",
     customClass: {
       popup: "custom-popup-class", // Define a custom CSS class for the alert

@@ -7,15 +7,25 @@ function App() {
 
   return (
     <div className="App">
-      <div className="content"></div>
-      <GameTitle />
-      <div className="cards-grid-container">
-        <CardsGrid />
-      </div>
       <div
         className="space-background"
-        style={{ backgroundImage: `url(${spaceBackground})` }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "100vh",
+          overflow: "hidden",
+          backgroundImage: `url(${spaceBackground})`,
+          backgroundSize: "cover",
+        }}
       ></div>
+      <div className="wrapper">
+        <div className="content"></div>
+        <GameTitle />
+        <div className="cards-grid-container">
+          <CardsGrid />
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@
   justify-content: center;
   width: 22vh;
   height: 22vh;
-  border-radius: 36px;
+  border-radius: 1.2em;
   background: radial-gradient(50% 50% at 50% 50%, #2e2876 0%, #430099 100%);
   cursor: pointer;
 }
