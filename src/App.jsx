@@ -1,7 +1,7 @@
 import "./App.css";
 import GameTitle from "./components/GameTitle/GameTitle";
 import CardsGrid from "./components/CardsGrid/CardsGrid";
-import spaceBackground from "./assets/space/background-space.jpg";
+import spaceBackground from "./assets/background-space.jpg";
 import { useEffect, useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import { isScreenPortrait } from "./utils/utils";

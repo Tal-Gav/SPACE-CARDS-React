@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Tilt } from "react-tilt";
 import "./Card.css";
 import { useSpring, animated } from "@react-spring/web";
-import cardBack from "../../assets/space/back-card.png";
+import cardBack from "../../assets/back-card.png";
 const Card = (props) => {
   const {
     index,
@@ -82,7 +82,7 @@ const Card = (props) => {
             ) : (
               <img
                 draggable="false"
-                src={`./src/assets/space/${image}.png`}
+                src={`./card-icons/${image}.png`}
                 alt="cardImg"
                 className="card-picture center invert"
                 style={{

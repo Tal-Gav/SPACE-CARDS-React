@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import "./CardsGrid.css";
 import Card from "../Card/Card";
-import medalImg from "../../assets/space/medal.png";
-import spaceCardsImg from "../../assets/space/space-favicon.png";
+import medalImg from "../../assets/medal.png";
+import spaceCardsImg from "../../assets/space-favicon.png";
 import { restartGame } from "../../utils/utils";
 
 const CardsGrid = () => {

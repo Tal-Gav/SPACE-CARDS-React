@@ -6,7 +6,7 @@ const VictoryAlert = (props) => {
   const [swalProps, setSwalProps] = useState({
     show: false, // Initially, don't show the alert
     title: "You Won!",
-    html: '<img src="./space/medal.png" alt="Victory Image" style="max-width: 20%;" />',
+    html: '<img src="./medal.png" alt="Victory Image" style="max-width: 20%;" />',
     confirmButtonText: "New Game",
     customClass: {
       popup: "swal-custom-style", // Define a custom CSS class for the alert
