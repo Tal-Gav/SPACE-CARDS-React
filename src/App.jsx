@@ -28,22 +28,28 @@ const App = () => {
   return (
     <>
       <Box p={1} pb={3}>
-        <Box p={1}>
-          {isPortarit && (
-            <Backdrop
-              sx={{
-                color: "#fff",
-                backgroundColor: "fff",
-                zIndex: (theme) => theme.zIndex.drawer + 1,
-              }}
-              open={true}
+        {isPortarit && (
+          <Backdrop
+            sx={{
+              color: "#fff",
+              backgroundColor: "fff",
+              zIndex: (theme) => theme.zIndex.drawer + 1,
+            }}
+            open={true}
+          >
+            <Box
+              p={1}
+              justifyContent={"center"}
+              alignItems={"center"}
+              flexDirection={"column"}
+              display={"flex"}
+              gap={5}
             >
-              <Typography fontSize={"1.8em"}>
-                Please rotate your phone in order to play.
-              </Typography>
-            </Backdrop>
-          )}
-        </Box>
+              <Typography fontSize={"1.8em"}>Rotate for game time. </Typography>
+              <div className="phone" />
+            </Box>
+          </Backdrop>
+        )}
 
         <div className="App">
           <div
