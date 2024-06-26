@@ -1,3 +1,7 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
 .App {
   text-align: center;
 }
@@ -49,7 +53,7 @@
   z-index: -1;
 }
 .cards-grid-container {
-  padding-top: 40px; /* Adjust the padding as needed */
+  padding-top: 20px; /* Adjust the padding as needed */
 }
 
 .wrapper {
